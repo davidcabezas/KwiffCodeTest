@@ -1,4 +1,4 @@
-package com.kwiffcodetest.model
+package com.kwiffcodetest.data
 
 import com.google.gson.annotations.SerializedName
 
