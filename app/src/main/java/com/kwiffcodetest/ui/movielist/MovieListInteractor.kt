@@ -1,6 +1,7 @@
 package com.kwiffcodetest.ui.movielist
 
 import com.kwiffcodetest.data.Movie
+import com.kwiffcodetest.data.Results
 import io.reactivex.Single
 
 /**
@@ -8,6 +9,6 @@ import io.reactivex.Single
  */
 interface MovieListInteractor {
 
-    fun getMovieList(): Single<List<Movie>>
+    fun getMovieList(): Single<Results<List<Movie>>>
 
 }

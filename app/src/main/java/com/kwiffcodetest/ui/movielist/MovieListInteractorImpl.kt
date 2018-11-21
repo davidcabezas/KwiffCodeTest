@@ -1,6 +1,7 @@
 package com.kwiffcodetest.ui.movielist
 
 import com.kwiffcodetest.data.Movie
+import com.kwiffcodetest.data.Results
 import com.kwiffcodetest.repository.MovieRepository
 import io.reactivex.Single
 
@@ -9,6 +10,6 @@ import io.reactivex.Single
  */
 class MovieListInteractorImpl(private val movieRepository: MovieRepository) : MovieListInteractor {
 
-    override fun getMovieList(): Single<List<Movie>> = movieRepository.getAllNowPlayingMovies()
+    override fun getMovieList(): Single<Results<List<Movie>>> = movieRepository.getAllNowPlayingMovies()
 
 }

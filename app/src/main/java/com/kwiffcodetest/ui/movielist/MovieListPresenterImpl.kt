@@ -40,9 +40,9 @@ class MovieListPresenterImpl
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        { list ->
+                        { result ->
                             view?.showProgress(false)
-                            view?.printMovieList(list)
+                            view?.printMovieList(result.results)
                         }, { error ->
                     view?.showProgress(false)
                     view?.showErrorMessage(error.localizedMessage)

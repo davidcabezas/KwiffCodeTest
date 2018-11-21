@@ -2,7 +2,7 @@
 <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/imageView_movie_item"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="240dp"
     android:scaleType="centerCrop">
 
 </ImageView>

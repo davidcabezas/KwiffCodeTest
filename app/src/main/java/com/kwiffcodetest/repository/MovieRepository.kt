@@ -1,6 +1,7 @@
 package com.kwiffcodetest.repository
 
 import com.kwiffcodetest.data.Movie
+import com.kwiffcodetest.data.Results
 import com.kwiffcodetest.retrofit.MovieApi
 import io.reactivex.Single
 import retrofit2.Retrofit
@@ -17,10 +18,10 @@ constructor(retrofit: Retrofit) : MovieApi {
 
     private val movieApi: MovieApi by lazy { retrofit.create(MovieApi::class.java) }
 
-    override fun getAllNowPlayingMovies(): Single<List<Movie>> = movieApi.getAllNowPlayingMovies()
+    override fun getAllNowPlayingMovies(): Single<Results<List<Movie>>> = movieApi.getAllNowPlayingMovies()
 
     override fun getMovieDetails(movieId: Int): Single<Movie> = movieApi.getMovieDetails(movieId)
 
-    override fun getCollectionOfMoviesById(collectionId: Int): Single<List<Movie>> = movieApi.getCollectionOfMoviesById(collectionId)
+    override fun getCollectionOfMoviesById(collectionId: Int): Single<Results<List<Movie>>> = movieApi.getCollectionOfMoviesById(collectionId)
 
 }

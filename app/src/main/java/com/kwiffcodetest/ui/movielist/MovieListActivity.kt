@@ -2,6 +2,7 @@ package com.kwiffcodetest.ui.movielist
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.widget.GridLayoutManager
 import android.view.View
 import com.kwiffcodetest.R
 import com.kwiffcodetest.data.Movie
@@ -39,6 +40,9 @@ class MovieListActivity : BaseActivity(), MovieListView, MovieListAdapter.OnItem
     private fun initializeView() {
 
         moviesAdapter = MovieListAdapter(this, picasso)
+
+        recyclerView_items_list.layoutManager = GridLayoutManager(this, 2)
+        recyclerView_items_list.adapter = moviesAdapter
 
     }
 
