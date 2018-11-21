@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">KwiffCodeTest</string>
+    <string name="retry">Retry</string>
 </resources>

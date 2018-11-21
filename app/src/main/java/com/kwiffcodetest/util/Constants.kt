@@ -5,6 +5,7 @@ package com.kwiffcodetest.util
  */
 object Constants {
 
+    const val MOVIE_ID = "com.kwiffcodetest.UI.MOVIE_ID"
     const val BASE_URL = "http://themoviedb.org/"
 
 }
