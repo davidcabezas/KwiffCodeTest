@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">KwiffCodeTest</string>
     <string name="retry">Retry</string>
+    <string name="overview">Overview</string>
+    <string name="release_date">Release date</string>
+    <string name="collection">Collection:</string>
 </resources>

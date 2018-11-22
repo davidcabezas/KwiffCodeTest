@@ -19,12 +19,11 @@ class AppModule() {
     @Provides
     @Singleton
     fun movieListPresenter(movieListInteractor: MovieListInteractor): MovieListPresenter =
-        MovieListPresenterImpl(movieListInteractor)
+            MovieListPresenterImpl(movieListInteractor)
 
 
     @Provides
-    @Singleton
     fun movieDetailPresenter(movieDetailInteractor: MovieDetailInteractor): MovieDetailPresenter =
-        MovieDetailPresenterImpl(movieDetailInteractor)
+            MovieDetailPresenterImpl(movieDetailInteractor)
 
 }

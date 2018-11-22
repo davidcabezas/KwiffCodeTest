@@ -1,5 +1,6 @@
 package com.kwiffcodetest.retrofit
 
+import com.kwiffcodetest.data.Collection
 import com.kwiffcodetest.data.Movie
 import com.kwiffcodetest.data.Results
 import io.reactivex.Single
@@ -18,6 +19,6 @@ interface MovieApi {
     fun getMovieDetails(@Path("movie_id") movieId: Int): Single<Movie>
 
     @GET("collection/{collection_id}")
-    fun getCollectionOfMoviesById(@Path("collection_id") collectionId: Int): Single<Results<List<Movie>>>
+    fun getCollectionOfMoviesById(@Path("collection_id") collectionId: Int): Single<Collection>
 
 }

@@ -1,5 +1,6 @@
 package com.kwiffcodetest.ui.moviedetail
 
+import com.kwiffcodetest.data.Collection
 import com.kwiffcodetest.data.Movie
 import io.reactivex.Single
 
@@ -9,5 +10,7 @@ import io.reactivex.Single
 interface MovieDetailInteractor {
 
     fun getMovieDetails(movieId: Int): Single<Movie>
+
+    fun getMovieCollection(collectionId: Int): Single<Collection>
 
 }

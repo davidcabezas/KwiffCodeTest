@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import com.kwiffcodetest.R
 import com.kwiffcodetest.data.Movie
 import com.kwiffcodetest.extension.inflate
-import com.kwiffcodetest.util.SharedViewData
 import com.squareup.picasso.Picasso
 import kotlin.properties.Delegates
 
@@ -15,7 +14,7 @@ import kotlin.properties.Delegates
 class MovieListAdapter(val listener: OnItemClickListener, val picasso: Picasso) : RecyclerView.Adapter<MovieViewHolder>() {
 
     interface OnItemClickListener {
-        fun onItemClick(item: Movie, sharedViewData: SharedViewData)
+        fun onItemClick(item: Movie)
     }
 
     internal var movieList: List<Movie> by Delegates.observable(emptyList()) { _, _, _ ->

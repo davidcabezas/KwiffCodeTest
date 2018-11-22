@@ -18,11 +18,11 @@ class InteractorModule {
     @Provides
     @Singleton
     fun getMovieListInteractor(movieRepository: MovieRepository): MovieListInteractor =
-        MovieListInteractorImpl(movieRepository)
+            MovieListInteractorImpl(movieRepository)
 
     @Provides
     @Singleton
     fun getMovieDetailInteractor(movieRepository: MovieRepository): MovieDetailInteractor =
-        MovieDetailInteractorImpl(movieRepository)
+            MovieDetailInteractorImpl(movieRepository)
 
 }

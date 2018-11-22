@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -13,63 +14,96 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/imageView_movie_poster"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:scaleType="centerCrop" />
-
-            <TextView
-                android:id="@+id/textView_movie_detail_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/imageView_movie_poster"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="15dp"
-                android:gravity="center"
-                android:text="Title"
-                android:textColor="@android:color/black"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/textView_recipe_detail_ingredients"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/textView_movie_detail_title"
-                android:layout_marginLeft="10sp"
-                android:layout_marginTop="10sp"
-                android:text=""
-                android:textColor="@android:color/black"
-                android:textSize="16sp" />
-
             <LinearLayout
-                android:id="@+id/layout_recipe_ingredients_container"
+                android:id="@+id/layout_movie_data"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/textView_recipe_detail_ingredients"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <ImageView
+                    android:id="@+id/imageView_movie_poster"
+                    android:layout_width="0dp"
+                    android:layout_height="240dp"
+                    android:layout_margin="15sp"
+                    android:layout_weight="1"
+                    android:scaleType="centerCrop" />
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/textView_movie_detail_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Title"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/textView_movie_detail_release_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textView_movie_detail_title"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center"
+                        android:text="@string/release_date"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp" />
+                </RelativeLayout>
 
             </LinearLayout>
 
             <TextView
-                android:id="@+id/textView_recipe_detail_instructions"
+                android:id="@+id/textView_movie_detail_overview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/layout_recipe_ingredients_container"
-                android:layout_marginLeft="10sp"
-                android:layout_marginTop="10sp"
-                android:text=""
+                android:layout_below="@id/layout_movie_data"
+                android:layout_marginLeft="15sp"
+                android:layout_marginRight="15sp"
+                android:text="@string/overview"
                 android:textColor="@android:color/black"
                 android:textSize="16sp" />
 
-            <LinearLayout
-                android:id="@+id/layout_recipe_instructions_container"
+            <RelativeLayout
+                android:id="@+id/layout_collection"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/textView_recipe_detail_instructions"
-                android:orientation="vertical">
+                android:layout_below="@id/textView_movie_detail_overview"
+                android:layout_marginBottom="15dp">
 
-            </LinearLayout>
+                <TextView
+                    android:id="@+id/textView_collection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15sp"
+                    android:text="@string/collection"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView_collection"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/textView_collection"
+                    android:layout_marginBottom="15dp"
+                    android:scrollbars="vertical">
+
+                </android.support.v7.widget.RecyclerView>
+
+                <ProgressBar
+                    android:id="@+id/loading_collection"
+                    style="?android:progressBarStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
 
         </RelativeLayout>
 

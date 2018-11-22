@@ -1,5 +1,6 @@
 package com.kwiffcodetest.ui.moviedetail
 
+import com.kwiffcodetest.data.Movie
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -31,7 +32,6 @@ class MovieDetailPresenterImpl
     }
 
     override fun getMovieDetails(movieId: Int) {
-        movieDetailInteractor
 
         view?.showProgress(true)
 
@@ -42,11 +42,48 @@ class MovieDetailPresenterImpl
                         { movie ->
                             view?.showProgress(false)
                             view?.printMovieDetails(movie)
+
+                            if (movie.belongsToCollection != null) {
+                                view?.showCollectionLayout(true)
+                                getMovieCollection(movie.belongsToCollection.id)
+                            } else {
+                                view?.showCollectionLayout(false)
+                            }
+
                         }, { error ->
                     view?.showProgress(false)
                     view?.showErrorMessage(error.localizedMessage)
                 })
 
         subscriptions.add(subscribe)
+
     }
+
+    override fun manageItemClick(movie: Movie) {
+        view?.showMovieDetailsView(movie.id)
+    }
+
+    // This function is private and called only prom the presenter itself because the View doesn't
+    // need to call method directly
+    private fun getMovieCollection(collectionId: Int) {
+
+        view?.showCollectionProgress(true)
+
+        val subscribe = movieDetailInteractor.getMovieCollection(collectionId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        { list ->
+                            view?.showCollectionProgress(false)
+                            view?.printCollection(list.parts!!)
+
+                        }, { error ->
+                    view?.showCollectionProgress(false)
+                    view?.showErrorMessage(error.localizedMessage)
+                })
+
+        subscriptions.add(subscribe)
+
+    }
+
 }

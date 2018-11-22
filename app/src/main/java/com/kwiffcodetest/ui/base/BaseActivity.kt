@@ -22,10 +22,10 @@ abstract class BaseActivity : AppCompatActivity() {
         val snackBar = Snackbar.make(viewContainer, message, Snackbar.LENGTH_INDEFINITE)
         snackBar.setAction(actionText) { _ -> action.invoke() }
         snackBar.setActionTextColor(
-            ContextCompat.getColor(
-                applicationContext,
-                R.color.colorAccent
-            )
+                ContextCompat.getColor(
+                        applicationContext,
+                        R.color.colorAccent
+                )
         )
         snackBar.show()
     }

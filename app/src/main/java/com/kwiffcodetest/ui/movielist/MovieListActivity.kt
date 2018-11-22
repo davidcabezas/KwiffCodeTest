@@ -9,7 +9,6 @@ import com.kwiffcodetest.data.Movie
 import com.kwiffcodetest.ui.base.BaseActivity
 import com.kwiffcodetest.ui.moviedetail.MovieDetailActivity
 import com.kwiffcodetest.util.Constants
-import com.kwiffcodetest.util.SharedViewData
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_movie_list.*
 import javax.inject.Inject
@@ -58,9 +57,9 @@ class MovieListActivity : BaseActivity(), MovieListView, MovieListAdapter.OnItem
         moviesAdapter.movieList = movieList
     }
 
-    override fun onItemClick(item: Movie, sharedViewData: SharedViewData) = presenter.manageItemClick(item, sharedViewData)
+    override fun onItemClick(item: Movie) = presenter.manageItemClick(item)
 
-    override fun showMovieDetailsView(movieId: Int, sharedViewData: SharedViewData) {
+    override fun showMovieDetailsView(movieId: Int) {
         val intent = Intent(this, MovieDetailActivity::class.java)
         intent.putExtra(Constants.MOVIE_ID, movieId)
         startActivity(intent)

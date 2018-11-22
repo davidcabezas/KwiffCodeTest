@@ -1,7 +1,6 @@
 package com.kwiffcodetest.ui.movielist
 
 import com.kwiffcodetest.data.Movie
-import com.kwiffcodetest.util.SharedViewData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -52,7 +51,7 @@ class MovieListPresenterImpl
 
     }
 
-    override fun manageItemClick(movie: Movie, sharedViewData: SharedViewData) {
-        view?.showMovieDetailsView(movie.id, sharedViewData)
+    override fun manageItemClick(movie: Movie) {
+        view?.showMovieDetailsView(movie.id)
     }
 }

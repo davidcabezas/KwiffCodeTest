@@ -1,5 +1,6 @@
 package com.kwiffcodetest.repository
 
+import com.kwiffcodetest.data.Collection
 import com.kwiffcodetest.data.Movie
 import com.kwiffcodetest.data.Results
 import com.kwiffcodetest.retrofit.MovieApi
@@ -22,6 +23,6 @@ constructor(retrofit: Retrofit) : MovieApi {
 
     override fun getMovieDetails(movieId: Int): Single<Movie> = movieApi.getMovieDetails(movieId)
 
-    override fun getCollectionOfMoviesById(collectionId: Int): Single<Results<List<Movie>>> = movieApi.getCollectionOfMoviesById(collectionId)
+    override fun getCollectionOfMoviesById(collectionId: Int): Single<Collection> = movieApi.getCollectionOfMoviesById(collectionId)
 
 }
