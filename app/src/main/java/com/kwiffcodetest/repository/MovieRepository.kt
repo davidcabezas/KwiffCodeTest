@@ -15,8 +15,6 @@ class MovieRepository
 @Inject
 constructor(retrofit: Retrofit) : MovieApi {
 
-    private val TAG = javaClass.simpleName
-
     private val movieApi: MovieApi by lazy { retrofit.create(MovieApi::class.java) }
 
     override fun getAllNowPlayingMovies(): Single<Results<List<Movie>>> = movieApi.getAllNowPlayingMovies()
