@@ -1,6 +1,7 @@
 package com.kwiffcodetest.ui.moviedetail
 
 import com.kwiffcodetest.data.Movie
+import com.kwiffcodetest.scheduler.BaseSchedulerProvider
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -10,7 +11,10 @@ import javax.inject.Inject
  * Created by David C. on 21/11/2018.
  */
 class MovieDetailPresenterImpl
-@Inject constructor(private val movieDetailInteractor: MovieDetailInteractor) : MovieDetailPresenter {
+@Inject constructor(
+    private val movieDetailInteractor: MovieDetailInteractor,
+    private val schedulerProvider: BaseSchedulerProvider
+) : MovieDetailPresenter {
 
     private var view: MovieDetailView? = null
     private val subscriptions = CompositeDisposable()
@@ -36,21 +40,21 @@ class MovieDetailPresenterImpl
         view?.showProgress(true)
 
         val subscribe = movieDetailInteractor.getMovieDetails(movieId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        { movie ->
-                            view?.showProgress(false)
-                            view?.printMovieDetails(movie)
+            .subscribeOn(schedulerProvider.io())
+            .observeOn(schedulerProvider.ui())
+            .subscribe(
+                { movie ->
+                    view?.showProgress(false)
+                    view?.printMovieDetails(movie)
 
-                            if (movie.belongsToCollection != null) {
-                                view?.showCollectionLayout(true)
-                                getMovieCollection(movie.belongsToCollection.id)
-                            } else {
-                                view?.showCollectionLayout(false)
-                            }
+                    if (movie.belongsToCollection != null) {
+                        view?.showCollectionLayout(true)
+                        getMovieCollection(movie.belongsToCollection.id)
+                    } else {
+                        view?.showCollectionLayout(false)
+                    }
 
-                        }, { error ->
+                }, { error ->
                     view?.showProgress(false)
                     view?.showErrorMessage(error.localizedMessage)
                 })
@@ -70,14 +74,14 @@ class MovieDetailPresenterImpl
         view?.showCollectionProgress(true)
 
         val subscribe = movieDetailInteractor.getMovieCollection(collectionId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        { list ->
-                            view?.showCollectionProgress(false)
-                            view?.printCollection(list.parts!!)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { list ->
+                    view?.showCollectionProgress(false)
+                    view?.printCollection(list.parts!!)
 
-                        }, { error ->
+                }, { error ->
                     view?.showCollectionProgress(false)
                     view?.showErrorMessage(error.localizedMessage)
                 })

@@ -3,6 +3,7 @@ package com.kwiffcodetest.movielist
 import com.kwiffcodetest.UnitTest
 import com.kwiffcodetest.data.Movie
 import com.kwiffcodetest.repository.MovieRepository
+import com.kwiffcodetest.retrofit.MovieApi
 import org.amshove.kluent.shouldEqual
 import org.junit.Before
 import org.junit.Test
@@ -11,7 +12,6 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import retrofit2.Call
 import retrofit2.Response
-import retrofit2.Retrofit
 
 /**
  * Created by David C. on 22/11/2018.
@@ -21,7 +21,7 @@ class MovieRepositoryTest : UnitTest() { // Test not finished (run out of time)
     private lateinit var movieRepository: MovieRepository
 
     @Mock
-    private lateinit var retrofit: Retrofit
+    private lateinit var movieApi: MovieApi
     @Mock
     private lateinit var moviesCall: Call<List<Movie>>
     @Mock
@@ -31,11 +31,26 @@ class MovieRepositoryTest : UnitTest() { // Test not finished (run out of time)
 
     @Before
     fun setUp() {
-        movieRepository = MovieRepository(retrofit)
+        movieRepository = MovieRepository(movieApi)
     }
 
     @Test
     fun shouldReturnEmptyListByDefault() {
+
+        given ( moviesResponse.body() ).willReturn(emptyList())
+        given ( moviesResponse.isSuccessful ).willReturn(true)
+        given ( moviesCall.execute() ).willReturn ( moviesResponse )
+        //given ( movieApi.getAllNowPlayingMovies() ).willReturn ( moviesCall )
+
+        val movies = movieRepository.getAllNowPlayingMovies()
+
+        movies shouldEqual emptyList<Movie>()
+        Mockito.verify(movieRepository).getAllNowPlayingMovies()
+
+    }
+
+    @Test
+    fun shouldReturnMovieList() {
 
         given ( moviesResponse.body() ).willReturn(listOf(mockMovie))
         given ( moviesResponse.isSuccessful ).willReturn(true)
@@ -43,7 +58,7 @@ class MovieRepositoryTest : UnitTest() { // Test not finished (run out of time)
 
         val movies = movieRepository.getAllNowPlayingMovies()
 
-        movies shouldEqual emptyList<Movie>()
+        movies shouldEqual listOf(mockMovie)
         Mockito.verify(movieRepository.getAllNowPlayingMovies())
 
     }

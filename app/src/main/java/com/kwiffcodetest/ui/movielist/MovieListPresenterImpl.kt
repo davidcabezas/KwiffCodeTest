@@ -1,16 +1,18 @@
 package com.kwiffcodetest.ui.movielist
 
 import com.kwiffcodetest.data.Movie
-import io.reactivex.android.schedulers.AndroidSchedulers
+import com.kwiffcodetest.scheduler.BaseSchedulerProvider
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 /**
  * Created by David C. on 21/11/2018.
  */
 class MovieListPresenterImpl
-@Inject constructor(private val movieListInteractor: MovieListInteractor) : MovieListPresenter {
+@Inject constructor(
+    private val movieListInteractor: MovieListInteractor,
+    private val schedulerProvider: BaseSchedulerProvider
+) : MovieListPresenter {
 
     private var view: MovieListView? = null
     private val subscriptions = CompositeDisposable()
@@ -36,13 +38,13 @@ class MovieListPresenterImpl
         view?.showProgress(true)
 
         val subscribe = movieListInteractor.getMovieList()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        { result ->
-                            view?.showProgress(false)
-                            view?.printMovieList(result.results)
-                        }, { error ->
+            .subscribeOn(schedulerProvider.io())
+            .observeOn(schedulerProvider.ui())
+            .subscribe(
+                { result ->
+                    view?.showProgress(false)
+                    view?.printMovieList(result.results)
+                }, { error ->
                     view?.showProgress(false)
                     view?.showErrorMessage(error.localizedMessage)
                 })

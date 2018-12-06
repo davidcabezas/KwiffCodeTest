@@ -5,7 +5,6 @@ import com.kwiffcodetest.data.Movie
 import com.kwiffcodetest.data.Results
 import com.kwiffcodetest.retrofit.MovieApi
 import io.reactivex.Single
-import retrofit2.Retrofit
 import javax.inject.Inject
 
 /**
@@ -13,9 +12,7 @@ import javax.inject.Inject
  */
 class MovieRepository
 @Inject
-constructor(retrofit: Retrofit) : MovieApi {
-
-    private val movieApi: MovieApi by lazy { retrofit.create(MovieApi::class.java) }
+constructor(val movieApi: MovieApi) : MovieApi {
 
     override fun getAllNowPlayingMovies(): Single<Results<List<Movie>>> = movieApi.getAllNowPlayingMovies()
 
